@@ -88,7 +88,7 @@
     <div onClick="{{ closeContact }}" style="position:absolute; inset:0; z-index:8; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:64px 28px 100px; cursor:zoom-out; animation:fadeIn .5s ease both;">
       <div onClick="{{ stop }}" style="cursor:auto; text-align:center; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; color:#FFFFFF; text-shadow:0 1px 36px rgba(0,0,0,0.5);">
         <div style="font-size:10.5px; letter-spacing:0.34em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:28px;">Contact</div>
-        <a href="/cdn-cgi/l/email-protection#b5ddd0d9d9daf5d8c0d6ddd8dac7d09bdcda" style="display:inline-block; font-size:clamp(30px,5.4vw,60px); font-weight:600; letter-spacing:-0.035em; line-height:1; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.25); padding-bottom:6px; transition:border-color .25s ease;" style-hover="border-color:#FFFFFF;"><span class="__cf_email__" data-cfemail="741c1118181b341901171c191b06115a1d1b">[email&#160;protected]</span></a>
+        <a href="{{ mailtoHref }}" style="display:inline-block; font-size:clamp(30px,5.4vw,60px); font-weight:600; letter-spacing:-0.035em; line-height:1; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.25); padding-bottom:6px; transition:border-color .25s ease;" style-hover="border-color:#FFFFFF;">{{ email }}</a>
       </div>
     </div>
   </sc-if>
@@ -126,7 +126,7 @@
   </div>
 </div>
 </x-dc>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;barStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;glass&quot;,&quot;solidDark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;glass&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showTagline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;autoShuffleSeconds&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:120,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;barStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;glass&quot;,&quot;solidDark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;glass&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showTagline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;autoShuffleSeconds&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:120,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;}}">
 class Component extends DCLogic {
   state = (() => {
     const sketches = [
@@ -176,6 +176,9 @@ class Component extends DCLogic {
   };
 
   renderVals() {
+    // Assemble the address from parts so it never appears literally in the
+    // served HTML — sidesteps Cloudflare's email obfuscation scanner.
+    const email = ['hello', 'muchmore.io'].join('@');
     const themes = {
       glass:     { bg: 'rgba(12,12,14,0.5)',  border: 'rgba(255,255,255,0.1)',  fg: '#F4F1EA', muted: 'rgba(244,241,234,0.62)', faint: 'rgba(244,241,234,0.5)', div: 'rgba(244,241,234,0.18)', btn: 'rgba(244,241,234,0.25)', btnH: 'rgba(244,241,234,0.1)' },
       solidDark: { bg: '#0b0b0c',             border: 'rgba(255,255,255,0.08)', fg: '#F4F1EA', muted: 'rgba(244,241,234,0.62)', faint: 'rgba(244,241,234,0.5)', div: 'rgba(244,241,234,0.18)', btn: 'rgba(244,241,234,0.25)', btnH: 'rgba(244,241,234,0.1)' },
@@ -200,6 +203,8 @@ class Component extends DCLogic {
       toggleContact: this.toggleContact,
       closeContact: this.closeContact,
       contactColor: this.state.contactOpen ? th.fg : th.muted,
+      email: email,
+      mailtoHref: 'mailto:' + email,
       onAboutScroll: this.onAboutScroll,
       scrollHintOpacity: this.state.aboutScrolled ? 0 : 1,
       stop: this.stop,
