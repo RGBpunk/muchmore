@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MUCHMORE — Design Studio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;background:#000;}
+  @keyframes barIn{from{opacity:0;transform:translateY(101%);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes scrollNudge{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+  @media (max-width:780px){.mm-tagwrap{display:none!important;}}
+  @media (max-width:540px){.mm-menu{gap:14px!important;}.mm-menu a{font-size:11.5px!important;}}
+</style>
+</helmet>
+<div style="position:fixed; inset:0; background:#000; overflow:hidden; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+
+  <iframe title="{{ sketchName }}" src="{{ sketchSrc }}" onLoad="{{ onFrameLoad }}" scrolling="no" style="position:absolute; inset:0; width:100%; height:100%; border:0; display:block; background:#000; opacity:{{ frameOpacity }}; transition:opacity .7s ease;"></iframe>
+
+  <sc-if value="{{ clientsOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeClients }}" style="position:absolute; inset:0; z-index:8; display:flex; align-items:center; justify-content:center; padding:64px 48px 100px; cursor:zoom-out; animation:fadeIn .5s ease both;">
+      <img src="clients.svg?v=3" alt="MUCHMORE clients" style="max-width:min(1100px,92%); max-height:100%; width:auto; height:auto; object-fit:contain;"/>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ aboutOpen }}" hint-placeholder-val="{{ false }}">
+    <div onScroll="{{ onAboutScroll }}" onClick="{{ closeAbout }}" style="position:absolute; inset:0; z-index:8; overflow-y:auto; display:flex; flex-direction:column; align-items:center; padding:132px 28px 140px; cursor:zoom-out; animation:fadeIn .6s ease both; -webkit-overflow-scrolling:touch;">
+
+      <div style="position:fixed; left:50%; bottom:78px; z-index:9; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:7px; pointer-events:none; opacity:{{ scrollHintOpacity }}; transition:opacity .5s ease;">
+        <span style="font-size:9.5px; letter-spacing:0.32em; text-transform:uppercase; color:rgba(255,255,255,0.5);">Scroll</span>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="animation:scrollNudge 1.8s ease-in-out infinite;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+
+      <button onClick="{{ closeAbout }}" aria-label="Close" style="position:fixed; top:30px; right:34px; z-index:9; width:26px; height:26px; padding:0; background:transparent; border:0; cursor:pointer; color:rgba(255,255,255,0.55); transition:color .25s ease;" style-hover="color:#FFFFFF;">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+      </button>
+
+      <div onClick="{{ stop }}" style="width:100%; max-width:580px; margin:auto; cursor:auto; text-align:left; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; color:#FFFFFF; text-shadow:0 1px 36px rgba(0,0,0,0.5);">
+
+        <div style="display:flex; justify-content:space-between; align-items:baseline; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.22); margin-bottom:52px;">
+          <span style="font-size:10.5px; letter-spacing:0.34em; text-transform:uppercase; color:rgba(255,255,255,0.62);">Statement</span>
+          <span style="font-size:10.5px; letter-spacing:0.34em; text-transform:uppercase; color:rgba(255,255,255,0.62);">MUCHMORE &mdash; CA</span>
+        </div>
+
+        <h1 style="font-size:clamp(46px,8vw,86px); font-weight:600; letter-spacing:-0.045em; line-height:0.92; margin:0;">Made<br/>for Forever</h1>
+
+        <p style="font-size:clamp(19px,2.3vw,23px); line-height:1.58; font-weight:400; margin:48px 0 0; color:#FFFFFF;">You care too much. About the detail nobody will notice. About getting it right, not just getting it done. You&rsquo;re building something meant to outlast the moment, while the world races to ship and forget.</p>
+
+        <p style="font-size:clamp(30px,4.6vw,48px); font-weight:400; line-height:1.12; letter-spacing:-0.03em; margin:72px 0; color:#FFFFFF;">Permanence is a choice. You already made it.</p>
+
+        <p style="font-size:17.5px; line-height:1.78; margin:0; color:rgba(255,255,255,0.74);">We&rsquo;re makers too. Whether it&rsquo;s the bleeding edge of code or the slowest handmade craft, we&rsquo;ve done it, we know it, we live at both ends. We know what it costs to refuse the disposable, and we recognize it in you.</p>
+
+        <p style="font-size:17.5px; line-height:1.78; margin:26px 0 0; color:rgba(255,255,255,0.74);">So this is the work: we take the thing you&rsquo;d never compromise, and give it a form that lasts as long as it deserves. We amplify the obsession. We make it permanent.</p>
+
+        <p style="font-size:17.5px; line-height:1.78; margin:26px 0 0; color:rgba(255,255,255,0.74);">Sometimes that means immutable and on-chain. Sometimes cotton paper and a steel press. Sometimes a name carved into a wall, so what you made doesn&rsquo;t disappear.</p>
+
+        <p style="font-size:17.5px; line-height:1.78; margin:26px 0 0; color:rgba(255,255,255,0.74);">We don&rsquo;t work with everyone. We work with the ones who already know the difference. The obsessives. The lifers. The ones building for forever, whether or not it pays today.</p>
+
+        <p style="font-size:17.5px; line-height:1.78; margin:26px 0 0; color:rgba(255,255,255,0.74);">If that&rsquo;s you, you already know what we are.</p>
+
+        <div style="margin-top:72px; padding-top:30px; border-top:1px solid rgba(255,255,255,0.22);">
+          <p style="font-size:clamp(26px,3.8vw,40px); font-weight:400; line-height:1.14; letter-spacing:-0.03em; margin:0; color:#FFFFFF;">Made for forever.</p>
+        </div>
+
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeContact }}" style="position:absolute; inset:0; z-index:8; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:64px 28px 100px; cursor:zoom-out; animation:fadeIn .5s ease both;">
+      <div onClick="{{ stop }}" style="cursor:auto; text-align:center; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; color:#FFFFFF; text-shadow:0 1px 36px rgba(0,0,0,0.5);">
+        <div style="font-size:10.5px; letter-spacing:0.34em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:28px;">Contact</div>
+        <a href="mailto:hello@muchmore.io" style="display:inline-block; font-size:clamp(30px,5.4vw,60px); font-weight:600; letter-spacing:-0.035em; line-height:1; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.25); padding-bottom:6px; transition:border-color .25s ease;" style-hover="border-color:#FFFFFF;">hello@muchmore.io</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="position:absolute; left:0; right:0; bottom:0; height:60px; display:flex; align-items:center; gap:20px; padding:0 26px; z-index:10; color:{{ fg }}; background:{{ barBg }}; backdrop-filter:blur(22px) saturate(1.3); -webkit-backdrop-filter:blur(22px) saturate(1.3); border-top:1px solid {{ barBorder }}; animation:barIn .85s cubic-bezier(.4,0,.2,1) both;">
+
+    <a href="./" title="MUCHMORE Studio" style="display:flex; align-items:center; flex-shrink:0; text-decoration:none; color:inherit;">
+      <svg viewBox="0 0 1500 279.1" height="27" style="display:block; width:auto; overflow:visible;" role="img" aria-label="MUCHMORE"><g fill="currentColor"><path d="M140.5,197.6v-115.3h23.1v23.1h23.1v23.1h23.1v23.1h-23.1v-23.1h-23.1v69.2h-23.1ZM232.7,197.6v-69.2h-23.1v-23.1h23.1v-23.1h23.1v115.3h-23.1Z"></path><path d="M347.7,197.6v-23.1h-23.1v-92.2h23.1v92.2h46.1v23.1h-46.1ZM393.8,174.6v-92.2h23.1v92.2h-23.1Z"></path><path d="M507.9,197.6v-23.1h-23.1v-69.2h23.1v69.2h46.1v23.1h-46.1ZM554,128.5v-23.1h-46.1v-23.1h46.1v23.1h23.1v23.1h-23.1ZM554,174.6v-23.1h23.1v23.1h-23.1Z"></path><path d="M644.8,197.6v-115.3h23.1v46.1h46.1v-46.1h23.1v115.3h-23.1v-46.1h-46.1v46.1h-23.1Z"></path><path d="M806,197.6v-115.3h23.1v23.1h23.1v23.1h23.1v23.1h-23.1v-23.1h-23.1v69.2h-23.1ZM898.2,197.6v-69.2h-23.1v-23.1h23.1v-23.1h23.1v115.3h-23.1Z"></path><path d="M1012.7,197.6v-23.1h-23.1v-69.2h23.1v-23.1h46.1v23.1h23.1v69.2h-23.1v23.1h-46.1ZM1012.7,173.6h46.1v-67.3h-46.1v67.3Z"></path><path d="M1150.2,197.6v-115.3h69.2v23.1h23.1v23.1h-23.1v46.1h23.1v23.1h-23.1v-23.1h-23.1v-23.1h-23.1v46.1h-23.1ZM1173.2,128.5h45.2v-23.1h-45.2v23.1Z"></path><path d="M1309.9,197.6v-115.3h69.2v23.1h-46.1v23.1h46.1v23.1h-46.1v23.1h46.1v23.1h-69.2Z"></path></g></svg>
+    </a>
+
+    <sc-if value="{{ showTagline }}" hint-placeholder-val="{{ true }}">
+      <span class="mm-tagwrap" style="display:flex; align-items:center; gap:20px; flex-shrink:0;">
+        <span style="width:1px; height:20px; background:{{ div }};"></span>
+        <span style="font-size:11px; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; color:{{ fgFaint }};">Design Studio, California</span>
+      </span>
+    </sc-if>
+
+    <nav class="mm-menu" style="display:flex; align-items:center; gap:24px; margin-left:auto;">
+      <button onClick="{{ toggleClients }}" style="font-family:inherit; padding:0; background:transparent; border:0; cursor:pointer; font-size:12.5px; letter-spacing:0.13em; text-transform:uppercase; color:{{ clientsColor }}; transition:color .25s ease;" style-hover="color:{{ fg }};">Clients</button>
+      <button onClick="{{ toggleAbout }}" style="font-family:inherit; padding:0; background:transparent; border:0; cursor:pointer; font-size:12.5px; letter-spacing:0.13em; text-transform:uppercase; color:{{ aboutColor }}; transition:color .25s ease;" style-hover="color:{{ fg }};">About</button>
+      <button onClick="{{ toggleContact }}" style="font-family:inherit; padding:0; background:transparent; border:0; cursor:pointer; font-size:12.5px; letter-spacing:0.13em; text-transform:uppercase; color:{{ contactColor }}; transition:color .25s ease;" style-hover="color:{{ fg }};">Contact</button>
+    </nav>
+
+    <span style="width:1px; height:20px; flex-shrink:0; background:{{ div }};"></span>
+
+    <button onClick="{{ shuffle }}" title="Shuffle sketch" style="width:34px; height:34px; flex-shrink:0; border-radius:50%; border:1px solid {{ btnBorder }}; background:transparent; color:inherit; display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0; transition:background .25s ease;" style-hover="background:{{ btnHover }};">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .65s cubic-bezier(.4,0,.2,1); transform:rotate({{ spinDeg }}deg);">
+        <polyline points="16 3 21 3 21 8"></polyline>
+        <line x1="4" y1="20" x2="21" y2="3"></line>
+        <polyline points="21 16 21 21 16 21"></polyline>
+        <line x1="15" y1="15" x2="21" y2="21"></line>
+        <line x1="4" y1="4" x2="9" y2="9"></line>
+      </svg>
+    </button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;barStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;glass&quot;,&quot;solidDark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;glass&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showTagline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;autoShuffleSeconds&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:120,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = (() => {
+    const sketches = [
+      { src: 'sketches/aura.html', name: 'AURA' },
+      { src: 'sketches/drift.html', name: 'DRIFT' },
+    ];
+    for (let n = 85; n <= 105; n++) sketches.push({ src: 'sketches/drift-' + n + '.html', name: 'DRIFT #' + n });
+    return { sketches, current: Math.floor(Math.random() * sketches.length), loaded: false, spins: 0, clientsOpen: false, aboutOpen: false, contactOpen: false };
+  })();
+
+  componentDidMount() { this._syncAuto(); }
+  componentDidUpdate() { this._syncAuto(); }
+  componentWillUnmount() { if (this._timer) clearInterval(this._timer); }
+
+  _syncAuto() {
+    const secs = Number(this.props.autoShuffleSeconds ?? 0);
+    if (this._autoSecs === secs) return;
+    this._autoSecs = secs;
+    if (this._timer) { clearInterval(this._timer); this._timer = null; }
+    if (secs > 0) this._timer = setInterval(() => this.shuffle(), secs * 1000);
+  }
+
+  shuffle = () => {
+    const { sketches, current, spins } = this.state;
+    // index 0 = AURA, indices 1..n = DRIFT variants.
+    // 50% chance of AURA on reroll, 50% split across the DRIFT variants.
+    const pick = () => (Math.random() < 0.5 || sketches.length < 2)
+      ? 0
+      : 1 + Math.floor(Math.random() * (sketches.length - 1));
+    let n = pick();
+    if (sketches.length > 1) { while (n === current) n = pick(); }
+    this.setState({ current: n, loaded: false, spins: spins + 1 });
+  };
+
+  onFrameLoad = () => this.setState({ loaded: true });
+
+  toggleClients = () => this.setState(s => ({ clientsOpen: !s.clientsOpen, aboutOpen: false, contactOpen: false }));
+  closeClients = () => this.setState({ clientsOpen: false });
+  toggleAbout = () => this.setState(s => ({ aboutOpen: !s.aboutOpen, clientsOpen: false, contactOpen: false }));
+  closeAbout = () => this.setState({ aboutOpen: false, aboutScrolled: false });
+  toggleContact = () => this.setState(s => ({ contactOpen: !s.contactOpen, clientsOpen: false, aboutOpen: false }));
+  closeContact = () => this.setState({ contactOpen: false });
+  stop = (e) => { e.stopPropagation(); };
+  onAboutScroll = (e) => {
+    const scrolled = e.target.scrollTop > 24;
+    if (scrolled !== this.state.aboutScrolled) this.setState({ aboutScrolled: scrolled });
+  };
+
+  renderVals() {
+    const themes = {
+      glass:     { bg: 'rgba(12,12,14,0.5)',  border: 'rgba(255,255,255,0.1)',  fg: '#F4F1EA', muted: 'rgba(244,241,234,0.62)', faint: 'rgba(244,241,234,0.5)', div: 'rgba(244,241,234,0.18)', btn: 'rgba(244,241,234,0.25)', btnH: 'rgba(244,241,234,0.1)' },
+      solidDark: { bg: '#0b0b0c',             border: 'rgba(255,255,255,0.08)', fg: '#F4F1EA', muted: 'rgba(244,241,234,0.62)', faint: 'rgba(244,241,234,0.5)', div: 'rgba(244,241,234,0.18)', btn: 'rgba(244,241,234,0.25)', btnH: 'rgba(244,241,234,0.1)' },
+      light:     { bg: 'rgba(245,243,238,0.82)', border: 'rgba(0,0,0,0.08)',    fg: '#16151a', muted: 'rgba(22,21,26,0.62)',  faint: 'rgba(22,21,26,0.5)',  div: 'rgba(22,21,26,0.16)',  btn: 'rgba(22,21,26,0.22)',  btnH: 'rgba(22,21,26,0.07)' },
+    };
+    const th = themes[this.props.barStyle ?? 'glass'] || themes.glass;
+    const s = this.state.sketches[this.state.current];
+    return {
+      sketchSrc: s.src,
+      sketchName: s.name,
+      frameOpacity: (this.state.clientsOpen || this.state.aboutOpen || this.state.contactOpen) ? 0.15 : (this.state.loaded ? 1 : 0),
+      onFrameLoad: this.onFrameLoad,
+      clientsOpen: this.state.clientsOpen,
+      toggleClients: this.toggleClients,
+      closeClients: this.closeClients,
+      clientsColor: this.state.clientsOpen ? th.fg : th.muted,
+      aboutOpen: this.state.aboutOpen,
+      toggleAbout: this.toggleAbout,
+      closeAbout: this.closeAbout,
+      aboutColor: this.state.aboutOpen ? th.fg : th.muted,
+      contactOpen: this.state.contactOpen,
+      toggleContact: this.toggleContact,
+      closeContact: this.closeContact,
+      contactColor: this.state.contactOpen ? th.fg : th.muted,
+      onAboutScroll: this.onAboutScroll,
+      scrollHintOpacity: this.state.aboutScrolled ? 0 : 1,
+      stop: this.stop,
+      shuffle: this.shuffle,
+      spinDeg: this.state.spins * 180,
+      showTagline: (this.props.showTagline ?? true),
+      barBg: th.bg, barBorder: th.border, fg: th.fg, fgMuted: th.muted, fgFaint: th.faint, div: th.div, btnBorder: th.btn, btnHover: th.btnH,
+    };
+  }
+}
+</script>
+</body>
+</html>
